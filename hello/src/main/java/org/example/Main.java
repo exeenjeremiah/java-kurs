@@ -1,7 +1,7 @@
 package org.example;
 public class Main {
     public static void main(String[] args) {
-            System.out.println("Hello, Karol");
+            System.out.println("Hello, Michal");
 
         }
     }

@@ -10,9 +10,10 @@ public class Main {
         double averageTemperature = 0;
         double highestTemperature = Double.NEGATIVE_INFINITY;
         double sum = 0;
-        while (true) {
 
+        while (true) {
             System.out.println("Podaj temperaturę w °C");
+
             if (!scanner.hasNextDouble()) {
                 System.out.println("Błędna temperatura. Podaj liczbę");
                 scanner.nextLine();
@@ -36,7 +37,6 @@ public class Main {
                 do {
                     System.out.println("Błędny znak. Podaj y lub n");
                     choice = scanner.nextLine().charAt(0);
-
                 } while ((choice != 'y' && choice != 'n'));
             }
 

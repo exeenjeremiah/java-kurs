@@ -39,6 +39,7 @@ public class Main {
                 break;
             }
         }
+
         System.out.println("Średnia temperatura wynosi: " + averageTemperature);
         System.out.println("Najwyższa temperatura wynosi: " + highestTemperature);
         String positivieOrNegative = averageTemperature >= 0

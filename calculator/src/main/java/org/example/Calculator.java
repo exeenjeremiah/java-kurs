@@ -60,7 +60,6 @@ public class Calculator {
 
         if (lastResult % 2 == 0) {
             System.out.println("Wynik jest parzysty");
-
         } else {
             System.out.println("Wynik jest nieparzysty");
         }

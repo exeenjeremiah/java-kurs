@@ -17,6 +17,7 @@ public class Calculator {
             double a = Double.parseDouble(parts[0]);
             char operator = parts[1].charAt(0);
             double b = Double.parseDouble(parts[2]);
+
             double result = switch (operator) {
                 case '+' -> a + b;
                 case '-' -> a - b;
@@ -41,6 +42,7 @@ public class Calculator {
             System.out.println(a + " " + operator + " " + b);
             System.out.println(result);
             System.out.println("Czy wykonać kolejne działanie? Y/N");
+
             char choice = sc.nextLine().charAt(0);
             if (choice == 'N') {
                 System.out.println("Przerwanie działania programu");
@@ -50,6 +52,7 @@ public class Calculator {
         }
         if (lastResult % 2 == 0) {
             System.out.println("Wynik jest parzysty");
+
         } else {
             System.out.println("Wynik jest nieparzysty");
         }

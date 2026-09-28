@@ -11,12 +11,14 @@ public class Main {
         double highestTemperature = Double.NEGATIVE_INFINITY;
         double sum = 0;
         while (true) {
+
             System.out.println("Podaj temperaturę w °C");
             if (!scanner.hasNextDouble()) {
                 System.out.println("Błędna temperatura. Podaj liczbę");
                 scanner.nextLine();
                 continue;
             }
+
             Double numbers = scanner.nextDouble();
             scanner.nextLine();
             temps.add(numbers);
@@ -26,14 +28,18 @@ public class Main {
             if (numbers > highestTemperature) {
                 highestTemperature = numbers;
             }
+
             System.out.println("Czy chcesz podać kolejną temperaturę? y/n");
             char choice = scanner.nextLine().charAt(0);
+
             if (choice != 'y' || choice != 'n') {
                 do {
                     System.out.println("Błędny znak. Podaj y lub n");
                     choice = scanner.nextLine().charAt(0);
+
                 } while ((choice != 'y' && choice != 'n'));
             }
+
             if (choice == 'n') {
                 System.out.println("Koniec programu");
                 break;

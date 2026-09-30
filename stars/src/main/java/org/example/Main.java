@@ -26,11 +26,11 @@ public class Main {
 //    }
 //}
 
-        for (int i = 0; i < a; i++) {
-            for (int j = a - i - 1; j > 0; j--) {
+        for (int i = 1; i < a; i++) {
+            for (int j = 0; j < a - i; j++) {
                 System.out.print(" ");
             }
-            for (int j = 0; j < 2 * i + 1; j++) {
+            for (int j = 0; j < 2 * i - 1; j++) {
                 System.out.print("*");
             }
             System.out.println();

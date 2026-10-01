@@ -23,9 +23,9 @@ public class Main {
 //            }
 //            System.out.println("");
 //        }
-//    }
-//}
-
+//        System.out.println("Podaj wysokość");
+//        int a = scanner.nextInt();
+//
 //        for (int i = 1; i < a; i++) {
 //            for (int j = 0; j < a - i; j++) {
 //                System.out.print(" ");

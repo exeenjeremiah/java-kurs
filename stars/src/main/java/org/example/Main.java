@@ -6,8 +6,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Podaj wysokość");
-        int a = scanner.nextInt();
+//        System.out.println("Podaj wysokość");
+//        int a = scanner.nextInt();
 //        System.out.println("Podaj szerokość");
 //        int b = scanner.nextInt();
 //
@@ -26,14 +26,34 @@ public class Main {
 //    }
 //}
 
-        for (int i = 1; i < a; i++) {
-            for (int j = 0; j < a - i; j++) {
-                System.out.print(" ");
+//        for (int i = 1; i < a; i++) {
+//            for (int j = 0; j < a - i; j++) {
+//                System.out.print(" ");
+//            }
+//            for (int j = 0; j < 2 * i - 1; j++) {
+//                System.out.print("*");
+//            }
+//            System.out.println();
+//        }
+//    }
+//}
+        System.out.println("Podaj swoje hasło:");
+        String password = scanner.nextLine();
+
+        boolean unique = true;
+        for (int i = 0; i < password.length(); i++) {
+
+            for (int j = i + 1; j < password.length(); j++) {
+
+                if (password.charAt(i) == password.charAt(j)) {
+                    unique = false;
+                }
             }
-            for (int j = 0; j < 2 * i - 1; j++) {
-                System.out.print("*");
-            }
-            System.out.println();
+        }
+        if (unique) {
+            System.out.println("Hasło ma unikalne znaki");
+        } else {
+            System.out.println("Hasło ma powtarzalne znaki");
         }
     }
 }

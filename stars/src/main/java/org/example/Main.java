@@ -39,7 +39,6 @@ public class Main {
 //            for (int j = i + 1; j < password.length(); j++) {
 //                if (password.charAt(i) == password.charAt(j)) {
 //                    unique = false;
-//
 //                }
 //            }
 //            break;

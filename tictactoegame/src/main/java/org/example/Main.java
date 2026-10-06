@@ -17,7 +17,9 @@ public class Main {
             int row = scanner.nextInt() - 1;
             int column = scanner.nextInt() - 1;
 
-            if (checkIfFieldIsNotTaken(board, row, column)) continue;
+            if (checkIfFieldIsNotTaken(board, row, column)) {
+                continue;
+            }
             board[row][column] = currentPlayer;
             moves++;
 
@@ -37,15 +39,12 @@ public class Main {
     }
 
     private static char changePlayer(char currentPlayer) {
-        if (currentPlayer == 'X') {
-            currentPlayer = 'O';
-        } else {
-            currentPlayer = 'X';
-        }
+        currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
         return currentPlayer;
     }
 
     private static boolean checkIfFieldIsNotTaken(char[][] board, int row, int column) {
+
         if (board[row][column] != ' ') {
             System.out.println("To pole jest już zajęte");
             return true;
@@ -62,11 +61,13 @@ public class Main {
     }
 
     private static void showBoard(char[][] board) {
+
         for (int i = 0; i < 3; i++) {
             System.out.println(
                     board[i][0] + " | " +
                             board[i][1] + " | " +
                             board[i][2]);
+
             if (i < 2) {
                 System.out.println("---------");
             }
@@ -75,11 +76,13 @@ public class Main {
 
     private static boolean checkWin(char[][] board, char player) {
         for (int i = 0; i < 3; i++) {
+
             if (board[i][0] == player &&
                     board[i][1] == player &&
                     board[i][2] == player) {
                 return true;
             }
+
             if (board[0][i] == player &&
                     board[1][i] == player &&
                     board[2][i] == player) {

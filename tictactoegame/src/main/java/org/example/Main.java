@@ -13,7 +13,7 @@ public class Main {
 
         while (moves < 9) {
             showBoard(board);
-            System.out.println("Gracz " + currentPlayer + ", podaj wiersz i kolumnę");
+            System.out.printf("Gracz %s, podaj wiersz i kolumnę", currentPlayer);
             int row = scanner.nextInt() - 1;
             int column = scanner.nextInt() - 1;
 
@@ -25,7 +25,7 @@ public class Main {
 
             if (checkWin(board, currentPlayer)) {
                 showBoard(board);
-                System.out.println("Gracz " + currentPlayer + " wygrywa!");
+                System.out.printf("Gracz %s wygrywa!", currentPlayer);
                 break;
             }
 
@@ -44,7 +44,6 @@ public class Main {
     }
 
     private static boolean checkIfFieldIsNotTaken(char[][] board, int row, int column) {
-
         if (board[row][column] != ' ') {
             System.out.println("To pole jest już zajęte");
             return true;
@@ -61,7 +60,6 @@ public class Main {
     }
 
     private static void showBoard(char[][] board) {
-
         for (int i = 0; i < 3; i++) {
             System.out.println(
                     board[i][0] + " | " +
@@ -76,7 +74,6 @@ public class Main {
 
     private static boolean checkWin(char[][] board, char player) {
         for (int i = 0; i < 3; i++) {
-
             if (board[i][0] == player &&
                     board[i][1] == player &&
                     board[i][2] == player) {

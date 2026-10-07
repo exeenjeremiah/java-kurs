@@ -20,6 +20,7 @@ public class Main {
             if (checkIfFieldIsNotTaken(board, row, column)) {
                 continue;
             }
+
             board[row][column] = currentPlayer;
             moves++;
 

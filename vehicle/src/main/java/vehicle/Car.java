@@ -2,7 +2,7 @@ package vehicle;
 
 public class Car extends Vehicle implements Drivable {
     private final int doors;
-    private final double fuel_consumption = 5.0;
+    private final double fuelconsumption = 5.0;
 
     public Car(String brand, String model, int year,
                FuelType fuelType, double tankCapacity,
@@ -19,7 +19,7 @@ public class Car extends Vehicle implements Drivable {
     public void drive() {
         System.out.println("Samochod zaczyna jechac.");
 
-        if (consumeFuel(fuel_consumption)) {
+        if (consumeFuel(fuelconsumption)) {
             System.out.println("Samochod jedzie");
         }
     }

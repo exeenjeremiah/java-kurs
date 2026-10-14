@@ -1,7 +1,7 @@
 package vehicle;
 
 public class Motorcycle extends Vehicle implements Drivable {
-    private static final double FUEL_CONSUMPTION = 2.0;
+    private final double fuelConsumption = 2.0;
 
     public Motorcycle(String brand, String model, int year, FuelType fuelType, double tankCapacity, double fuelLevel) {
         super(brand, model, year, fuelType, tankCapacity, fuelLevel);
@@ -11,7 +11,7 @@ public class Motorcycle extends Vehicle implements Drivable {
     public void drive() {
         System.out.println("Motocykl zaczyna jechac.");
 
-        if (consumeFuel(FUEL_CONSUMPTION)) {
+        if (consumeFuel(fuelConsumption)) {
             System.out.println("Motocykl jedzie");
         }
     }

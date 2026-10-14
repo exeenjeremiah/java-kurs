@@ -1,7 +1,5 @@
 package vehicle;
 
-import java.math.BigDecimal;
-
 public abstract class Vehicle {
     protected String brand;
     protected String model;

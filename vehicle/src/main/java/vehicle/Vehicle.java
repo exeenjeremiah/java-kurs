@@ -1,5 +1,7 @@
 package vehicle;
 
+import java.math.BigDecimal;
+
 public abstract class Vehicle {
     protected String brand;
     protected String model;
@@ -11,7 +13,6 @@ public abstract class Vehicle {
     public Vehicle(String brand, String model, int year,
                    FuelType fuelType, double tankCapacity,
                    double fuelLevel) {
-
         if (tankCapacity <= 0) {
             System.out.println("Pojemnosc zbiornika musi byc dodatnia!");
         }
@@ -31,11 +32,11 @@ public abstract class Vehicle {
     public void displayInfo() {
         System.out.printf(
                 "Marka: %s%n" +
-                "Model: %s%n" +
-                "Rok: %d%n" +
-                "Rodzaj paliwa:  %s%n" +
-                "Stan paliwa: %.2f%n" +
-                "Pojemnosc zbiornika: %.2f%n",
+                        "Model: %s%n" +
+                        "Rok: %d%n" +
+                        "Rodzaj paliwa:  %s%n" +
+                        "Stan paliwa: %.2f%n" +
+                        "Pojemnosc zbiornika: %.2f%n",
                 brand, model, year, fuelType, fuelLevel, tankCapacity);
     }
 
@@ -57,12 +58,11 @@ public abstract class Vehicle {
         }
 
         fuelLevel += liters;
-        System.out.printf("Zatankowano: %s %nAktualny stan paliwa: %s %nKoszt: %.2f %n",
-                liters, fuelLevel, fuelType.refuelCost(liters));
+        System.out.printf("Zatankowano: %.2f%nAktualny stan paliwa: %.2f%nKoszt: %s%n",
+                liters, fuelLevel, fuelType.refuelCost(BigDecimal.valueOf(liters)));
     }
 
     protected boolean consumeFuel(double amount) {
-
         if (fuelLevel < amount) {
             System.out.println(
                     "Zabraklo paliwa. Nie mozna kontynuowac podrozy"

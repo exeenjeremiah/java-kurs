@@ -1,16 +1,18 @@
 package vehicle;
 
-public enum FuelType {
-    PETROL(7.20),
-    DIESEL(9.14),
-    ELECTRIC(1.05);
-    private final double price;
+import java.math.BigDecimal;
 
-    FuelType(double price) {
-        this.price = price;
+public enum FuelType {
+    PETROL("7.20"),
+    DIESEL("9.14"),
+    ELECTRIC("1.05");
+    private final BigDecimal price;
+
+    FuelType(String price) {
+        this.price = new BigDecimal(price);
     }
 
-    public double refuelCost(double liters) {
-        return price * liters;
+    public BigDecimal refuelCost(BigDecimal liters) {
+        return price.multiply(liters);
     }
 }

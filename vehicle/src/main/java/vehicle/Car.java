@@ -2,7 +2,7 @@ package vehicle;
 
 public class Car extends Vehicle implements Drivable {
     private final int doors;
-    private static final double FUEL_CONSUMPTION = 5.0;
+    private final double FUEL_CONSUMPTION = 5.0;
 
     public Car(String brand, String model, int year,
                FuelType fuelType, double tankCapacity,

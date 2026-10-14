@@ -59,7 +59,7 @@ public abstract class Vehicle {
 
         fuelLevel += liters;
         System.out.printf("Zatankowano: %.2f%nAktualny stan paliwa: %.2f%nKoszt: %s%n",
-                liters, fuelLevel, fuelType.refuelCost(BigDecimal.valueOf(liters)));
+                liters, fuelLevel, fuelType.refuelCost(liters));
     }
 
     protected boolean consumeFuel(double amount) {

@@ -30,7 +30,6 @@ public class Laptop extends ElectronicDevice implements Usable {
 
         batteryLevel -= energy;
         System.out.println("Laptop był używany.");
-
         System.out.printf("Poziom baterii: %.1f Wh", batteryLevel);
     }
 

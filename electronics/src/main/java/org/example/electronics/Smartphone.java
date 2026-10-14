@@ -13,20 +13,25 @@ public class Smartphone extends ElectronicDevice implements Usable {
     public void use(double hours) {
         if (hours < 0) {
             System.out.println("Czas pracy nie może być ujemny!");
-        } else if (batteryLevel <= 0) {
-            System.out.println("Bateria smartfona jest rozładowana!");
-        } else {
-            double energy = deviceType.calculateConsumption(hours);
-
-            if (energy >= batteryLevel) {
-                batteryLevel = 0;
-                System.out.println("Bateria rozładowała się podczas pracy!");
-            } else {
-                batteryLevel -= energy;
-                System.out.println("Smartphone był używany.");
-            }
-            System.out.printf("Poziom baterii: %.1f Wh", batteryLevel);
+            return;
         }
+
+        if (batteryLevel <= 0) {
+            System.out.println("Bateria smartfona jest rozładowana!");
+            return;
+        }
+
+        double energy = deviceType.calculateConsumption(hours);
+
+        if (energy >= batteryLevel) {
+            batteryLevel = 0;
+            System.out.println("Bateria rozładowała się podczas pracy!");
+            return;
+        }
+
+        batteryLevel -= energy;
+        System.out.println("Smartphone był używany.");
+        System.out.printf("Poziom baterii: %.1f Wh", batteryLevel);
     }
 
     @Override

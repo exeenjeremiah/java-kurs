@@ -1,8 +1,8 @@
 package org.example.library;
 
 public class Movie extends LibraryItem {
-    private String director;
-    private int duration;
+    private final String director;
+    private final int duration;
 
     private static int count = 0;
 
@@ -19,7 +19,7 @@ public class Movie extends LibraryItem {
 
     @Override
     public String getInfo() {
-        return String.format("Film: %s%nReżyser: %s%nCzas trwania: %d minut%nStatus: %s",
+        return String.format("Film: %s%nReżyser: %s%nCzas trwania: %d minut%nStatus: %s%n",
                 getTitle(),
                 director,
                 duration,

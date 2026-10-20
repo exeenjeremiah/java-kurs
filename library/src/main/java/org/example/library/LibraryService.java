@@ -2,9 +2,8 @@ package org.example.library;
 
 public class LibraryService {
     private final int librarySize = 10;
-    private LibraryItem[] items = new LibraryItem[librarySize];
+    private final LibraryItem[] items = new LibraryItem[librarySize];
     private int count = 0;
-
 
     public void addItem(LibraryItem item) {
         if (count < librarySize) {
@@ -28,8 +27,7 @@ public class LibraryService {
     }
 
     public void borrowItem(String title) {
-        LibraryItem item = findItem(title);
-        {
+        LibraryItem item = findItem(title); {
             if (item == null) {
                 System.out.println("Nie znaleziono podanego itemu");
                 return;

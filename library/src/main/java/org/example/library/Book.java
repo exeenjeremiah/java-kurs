@@ -1,24 +1,24 @@
 package org.example.library;
 
 public class Book extends LibraryItem {
-    private String author;
-    private int pages;
-    private int count = 0;
+    private final String author;
+    private final int pages;
+    private static int count = 0;
 
-    public Book(String title, boolean borrowed, String author, int pages, int count) {
+    public Book(String title, boolean borrowed, String author, int pages) {
         super(title, borrowed);
         this.author = author;
         this.pages = pages;
-        this.count = count;
+        count++;
     }
 
-    public int getCount() {
+    public static int getCount() {
         return count;
     }
 
     @Override
     public String getInfo() {
-        return String.format("Książka: %s%nAutor: %s%nLiczba stron: %d%nStatus: %s", getTitle(), author, pages,
+        return String.format("Książka: %s%nAutor: %s%nLiczba stron: %d%nStatus: %s%n", getTitle(), author, pages,
                 isBorrowed() ? "Wypożyczona" : "Dostępna");
     }
 }

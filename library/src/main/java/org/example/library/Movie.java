@@ -18,7 +18,7 @@ public class Movie extends LibraryItem {
     }
 
     @Override
-    public String getInfo() {
+    public String toString() {
         return String.format("Film: %s%nReżyser: %s%nCzas trwania: %d minut%nStatus: %s%n",
                 getTitle(),
                 director,

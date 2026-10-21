@@ -17,7 +17,7 @@ public class Book extends LibraryItem {
     }
 
     @Override
-    public String getInfo() {
+    public String toString() {
         return String.format("Książka: %s%nAutor: %s%nLiczba stron: %d%nStatus: %s%n", getTitle(), author, pages,
                 isBorrowed() ? "Wypożyczona" : "Dostępna");
     }

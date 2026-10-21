@@ -27,7 +27,8 @@ public class LibraryService {
     }
 
     public void borrowItem(String title) {
-        LibraryItem item = findItem(title); {
+        LibraryItem item = findItem(title);
+        {
             if (item == null) {
                 System.out.println("Nie znaleziono podanego itemu");
                 return;

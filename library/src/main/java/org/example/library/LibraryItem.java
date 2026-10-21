@@ -36,5 +36,6 @@ public abstract class LibraryItem {
         System.out.printf("Zwrócono: %s%n", title);
     }
 
-    public abstract String getInfo();
+    @Override
+    public abstract String toString();
 }

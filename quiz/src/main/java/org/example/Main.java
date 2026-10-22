@@ -125,7 +125,7 @@ public class Main {
                 System.out.println(score + " ");
             }
         }
-        System.out.printf("(" + max + " razy)");
+        System.out.printf("(%d razy)%n", max);
     }
 
     private static void changeResult(int[] results) {

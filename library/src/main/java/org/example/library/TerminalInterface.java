@@ -32,7 +32,6 @@ public class TerminalInterface {
         library.returnItem(scanner.nextLine());
     }
 
-
     public void start() {
         int choice = 0;
 

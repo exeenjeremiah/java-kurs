@@ -28,13 +28,11 @@ public class LibraryService {
 
     public void borrowItem(String title) {
         LibraryItem item = findItem(title);
-        {
-            if (item == null) {
-                System.out.println("Nie znaleziono podanego itemu");
-                return;
-            }
-            item.borrow();
+        if (item == null) {
+            System.out.println("Nie znaleziono podanego itemu");
+            return;
         }
+        item.borrow();
     }
 
     public void returnItem(String title) {

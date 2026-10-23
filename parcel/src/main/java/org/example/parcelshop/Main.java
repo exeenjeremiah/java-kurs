@@ -9,15 +9,15 @@ public class Main {
                 new CourierDelivery(),
                 new BigDecimal("300"),
                 "Mateusz Zgerypała");
-        order.showOrder();
+        System.out.println(order);
 
         System.out.printf("%n--- Zmiany dostaw i rabatu ---%n");
         order.changeDelivery(new ParcelLockerDelivery());
         order.changeDiscount(new AmountDiscount());
-        order.showOrder();
+        System.out.println(order);
 
         order.changeDelivery(new PersonalPickup());
         order.changeDiscount(new NoDiscount());
-        order.showOrder();
+        System.out.println(order);
     }
 }

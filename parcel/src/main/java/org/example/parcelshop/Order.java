@@ -31,14 +31,26 @@ public class Order {
         this.discount = discount;
     }
 
-    public void showOrder() {
-        System.out.printf("%n--- Zamówienie ---%n");
-        System.out.printf("Klient: %s%n", customerName);
-        System.out.printf("Wartość produktów: %s zł%n", productsValue.setScale(2, RoundingMode.HALF_UP));
-        System.out.printf("Dostawa: %s%n", delivery.getName());
-        System.out.printf("Koszt dostawy: %s zł%n", delivery.getCost().setScale(2,RoundingMode.HALF_UP));
-        System.out.printf("Rabat: %s%n", discount.getName());
-        System.out.printf("Kwota rabatu: %s zł%n", discount.calculate(productsValue).setScale(2, RoundingMode.HALF_UP));
-        System.out.printf("Cena końcowa: %s zł%n", calculateFinalPrice().setScale(2, RoundingMode.HALF_UP));
+    private String formatMoney(BigDecimal value) {
+        return value.setScale(2, RoundingMode.HALF_UP) + " zł";
+    }
+
+    public String toString () {
+        return """
+                Klient: %s
+                Wartość produktów: %s
+                Dostawa: %s
+                Koszt dostawy: %s
+                Rabat: %s
+                Kwota rabatu: %s
+                Cena końcowa: %s
+                """.formatted(
+                customerName,
+                formatMoney(productsValue),
+                delivery.getName(),
+                formatMoney(delivery.getCost()),
+                discount.getName(),
+                formatMoney(discount.calculate(productsValue)),
+                formatMoney(calculateFinalPrice()));
     }
 }

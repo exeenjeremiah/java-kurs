@@ -3,8 +3,6 @@ package org.example;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SchoolStore {
-    private Map<String, Product> catalog = new HashMap<>();
+public class ShoppingCart {
     private Map<String, Integer> cart = new HashMap<>();
-
 }

@@ -28,4 +28,12 @@ public class Product {
     public int getStock() {
         return stock;
     }
+
+    public boolean decreaseStock(int quantity) {
+        if (quantity <= 0 || quantity > stock) {
+            return false;
+        }
+        stock -= quantity;
+        return true;
+    }
 }

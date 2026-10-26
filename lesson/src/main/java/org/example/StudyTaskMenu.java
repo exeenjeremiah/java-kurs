@@ -48,8 +48,8 @@ public class StudyTaskMenu {
                         case "1" -> manager.showAllTasks();
                         case "2" -> manager.showActiveTasks();
                         case "3" -> manager.showCompletedTasks();
-                        case "0" -> System.out.printf("Powrót%n");
-                        default -> System.out.printf("Zły wybór%n");
+                        case "0" -> System.out.println("Powrót");
+                        default -> System.out.println("Zły wybór filtra");
                     }
                 }
 
@@ -104,11 +104,11 @@ public class StudyTaskMenu {
                 case "8" -> manager.showAllTags();
 
                 case "0" -> {
-                    System.out.print("Koniec programuu");
+                    System.out.println("Koniec programu ");
                     return;
                 }
 
-                default -> System.out.print("Zły wybór");
+                default -> System.out.println("Zły wybór: ");
             }
         }
     }

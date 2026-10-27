@@ -29,26 +29,9 @@ public class UserInterface {
             option = readNumber();
             switch (option) {
                 case 1 -> shop.showCatalog();
-                case 2 -> {
-                    System.out.println("Podaj kod");
-                    String code = scanner.nextLine();
-                    shop.showProduct(code);
-                }
-                case 3 -> {
-                    System.out.println("Podaj kod: ");
-                    String code = scanner.nextLine();
-
-                    System.out.println("Podaj ilosc: ");
-                    int quantity = readNumber();
-                    shop.addToCart(code, quantity);
-                }
-                case 4 -> {
-                    System.out.println("Podaj kod: ");
-                    String code = scanner.nextLine();
-                    System.out.println("Podaj ilosc: ");
-                    int quantity = readNumber();
-                    shop.removeFromCart(code, quantity);
-                }
+                case 2 -> findProduct();
+                case 3 -> addProduct();
+                case 4 -> removeProduct();
                 case 5 -> shop.showCart();
                 case 6 -> shop.checkout();
                 case 7 -> shop.clearCart();
@@ -57,6 +40,30 @@ public class UserInterface {
             }
         } while (option != 0);
         scanner.close();
+    }
+
+    private void findProduct() {
+        System.out.println("Podaj kod");
+        String code = scanner.nextLine();
+        shop.showProduct(code);
+    }
+
+    private void addProduct() {
+        System.out.println("Podaj kod: ");
+        String code = scanner.nextLine();
+
+        System.out.println("Podaj ilosc: ");
+        int quantity = readNumber();
+        shop.addToCart(code, quantity);
+    }
+
+    private void removeProduct() {
+        System.out.println("Podaj kod: ");
+        String code = scanner.nextLine();
+
+        System.out.println("Podaj ilosc: ");
+        int quantity = readNumber();
+        shop.removeFromCart(code, quantity);
     }
 
     private int readNumber() {

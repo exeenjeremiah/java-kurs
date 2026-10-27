@@ -12,6 +12,7 @@ public class ShoppingCart {
     }
 
     public void add(String code, int quantity) {
+
         if (quantity > 0) {
             cart.put(code, getQuantity(code) + quantity);
         }
@@ -19,14 +20,17 @@ public class ShoppingCart {
 
     public void remove(String code, int quantity) {
         int currentQuantity = getQuantity(code);
+
         if (quantity <= 0 || quantity > currentQuantity) {
             return;
         }
+
         if (quantity == currentQuantity) {
             cart.remove(code);
         } else {
             cart.put(code, currentQuantity - quantity);
         }
+
     }
 
     public int calculateTotal(ProductCatalog catalog) {

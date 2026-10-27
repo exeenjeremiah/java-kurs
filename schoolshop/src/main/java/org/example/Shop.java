@@ -1,8 +1,12 @@
 package org.example;
 
 public class Shop {
-    private ProductCatalog catalog = new ProductCatalog();
-    private ShoppingCart cart = new ShoppingCart(catalog);
+    private final ProductCatalog catalog = new ProductCatalog();
+    private final ShoppingCart cart;
+
+    public Shop(ShoppingCart cart) {
+        this.cart = cart;
+    }
 
     public void showCatalog() {
         catalog.showCatalog();
@@ -62,7 +66,7 @@ public class Shop {
     }
 
     public int calculateTotal() {
-        return cart.calculateTotal();
+        return cart.calculateTotal(catalog);
     }
 
     public int calculateDiscount() {
@@ -80,8 +84,6 @@ public class Shop {
         }
         for (String code : cart.getCodes()) {
             Product product = catalog.findProduct(code);
-            int quantity = cart.getQuantity(code);
-            int value = product.getPriceInGrosze() * quantity;
             System.out.printf("Kod: %s, Nazwa: %s, Cena: %d gr, Stan: %d%n", product.getCode(), product.getName(), product.getPriceInGrosze(), product.getStock());
         }
         int total = calculateTotal();

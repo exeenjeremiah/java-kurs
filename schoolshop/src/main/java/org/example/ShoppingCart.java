@@ -5,12 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class ShoppingCart {
-    private Map<String, Integer> cart = new HashMap<>();
-    private ProductCatalog catalog;
-
-    public ShoppingCart(ProductCatalog catalog) {
-        this.catalog = catalog;
-    }
+    private final Map<String, Integer> cart = new HashMap<>();
 
     public int getQuantity(String code) {
         return cart.getOrDefault(code, 0);
@@ -34,7 +29,7 @@ public class ShoppingCart {
         }
     }
 
-    public int calculateTotal() {
+    public int calculateTotal(ProductCatalog catalog) {
         int total = 0;
         for (String code : cart.keySet()) {
             Product product = catalog.findProduct(code);

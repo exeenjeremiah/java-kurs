@@ -1,9 +1,9 @@
 package org.example;
 
 public class Product {
-    private String code;
-    private String name;
-    private int priceInGrosze;
+    private final String code;
+    private final String name;
+    private final int priceInGrosze;
     private int stock;
 
     public Product(String code, String name, int priceInGrosze, int stock) {
@@ -29,11 +29,10 @@ public class Product {
         return stock;
     }
 
-    public boolean decreaseStock(int quantity) {
+    public void decreaseStock(int quantity) {
         if (quantity <= 0 || quantity > stock) {
-            return false;
+            return;
         }
         stock -= quantity;
-        return true;
     }
 }

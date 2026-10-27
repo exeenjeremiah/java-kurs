@@ -16,4 +16,15 @@ public class ProductCatalog {
         code = code.trim().toUpperCase();
         return products.get(code);
     }
+
+    public void showCatalog() {
+        for (String code : products.keySet()) {
+            Product product = products.get(code);
+            System.out.printf("Kod: %s, Nazwa: %s, Cena: %d gr, Stan: %d%n",
+                    product.getCode(),
+                    product.getName(),
+                    product.getPriceInGrosze(),
+                    product.getStock());
+        }
+    }
 }

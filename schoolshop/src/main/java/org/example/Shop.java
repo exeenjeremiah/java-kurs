@@ -18,7 +18,8 @@ public class Shop {
             System.out.println("Nie ma produktu o takim kodzie.");
             return;
         }
-        System.out.printf("Kod: %s, Nazwa: %s, Cena: %d gr, Stan: %d%n", product.getCode(), product.getName(), product.getPriceInGrosze(), product.getStock());
+        System.out.printf("Kod: %s, Nazwa: %s, Cena: %d gr, Stan: %d%n",
+                product.getCode(), product.getName(), product.getPriceInGrosze(), product.getStock());
     }
 
     public void addToCart(String code, int quantity) {
@@ -84,7 +85,8 @@ public class Shop {
         }
         for (String code : cart.getCodes()) {
             Product product = catalog.findProduct(code);
-            System.out.printf("Kod: %s, Nazwa: %s, Cena: %d gr, Stan: %d%n", product.getCode(), product.getName(), product.getPriceInGrosze(), product.getStock());
+            System.out.printf("Kod: %s, Nazwa: %s, Cena: %d gr, Stan: %d%n",
+                    product.getCode(), product.getName(), product.getPriceInGrosze(), product.getStock());
         }
         int total = calculateTotal();
         int discount = calculateDiscount();

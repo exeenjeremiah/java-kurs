@@ -10,8 +10,8 @@ import java.util.Set;
 
 public class ShipmentManager {
 
-    private Map<String, Shipment> shipments;
-    private List<String> history;
+    private final Map<String, Shipment> shipments;
+    private final List<String> history;
 
     public ShipmentManager() {
         shipments = new LinkedHashMap<>();
@@ -58,7 +58,6 @@ public class ShipmentManager {
     }
 
     public void showAllShipments() {
-
         if (shipments.isEmpty()) {
             System.out.println("Rejestr jest pusty.");
             return;
@@ -71,10 +70,10 @@ public class ShipmentManager {
                 status = "Nadana";
             }
 
-            System.out.printf("ID: %s | %s Koszt: %d gr Status: %s%n",
+            System.out.printf("ID: %s | %s Koszt: %.2f zł Status: %s%n",
                     shipment.getId(),
                     shipment.getDescription(),
-                    shipment.calculateCost(),
+                    shipment.calculateCost() / 100.0,
                     status);
         }
     }
@@ -93,10 +92,10 @@ public class ShipmentManager {
             status = "Nadana";
         }
 
-        System.out.printf("ID: %s | %s Koszt: %d gr Status: %s%n",
+        System.out.printf("ID: %s | %s Koszt: %.2f zł Status: %s%n",
                 shipment.getId(),
                 shipment.getDescription(),
-                shipment.calculateCost(),
+                shipment.calculateCost() / 100.0,
                 status);
     }
 
@@ -130,7 +129,6 @@ public class ShipmentManager {
     }
 
     public void showHistory() {
-
         if (history.isEmpty()) {
             System.out.println("Historia jest pusta");
             return;

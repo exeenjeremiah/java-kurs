@@ -30,7 +30,6 @@ public class Product {
     }
 
     public void decreaseStock(int quantity) {
-
         if (quantity <= 0 || quantity > stock) {
             return;
         }

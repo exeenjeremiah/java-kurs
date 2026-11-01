@@ -12,7 +12,6 @@ public class ShoppingCart {
     }
 
     public void add(String code, int quantity) {
-
         if (quantity > 0) {
             cart.put(code, getQuantity(code) + quantity);
         }

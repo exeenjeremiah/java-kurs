@@ -115,7 +115,6 @@ public class Shop {
     }
 
     public void checkout() {
-
         if (cart.isEmpty()) {
             System.out.println("Nie można kupić pustego koszyka.");
             return;

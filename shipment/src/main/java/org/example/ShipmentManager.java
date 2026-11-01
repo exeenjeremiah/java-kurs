@@ -7,9 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
 public class ShipmentManager {
-
     private final Map<String, Shipment> shipments;
     private final List<String> history;
 

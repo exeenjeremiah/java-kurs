@@ -47,7 +47,6 @@ public class UserInterface {
     }
 
     private int readNumber(String message) {
-
         System.out.println(message);
 
         while (!scanner.hasNextInt()) {
@@ -79,7 +78,6 @@ public class UserInterface {
     }
 
     private void findShipment() {
-
         System.out.println("Podaj ID: ");
         String id = scanner.nextLine();
         manager.showById(id);

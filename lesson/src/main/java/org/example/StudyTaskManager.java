@@ -20,7 +20,7 @@ public class StudyTaskManager {
 
     public void addTask(String title) {
         if (title.trim().isEmpty()) {
-            System.out.printf("Tytuł nie może być pusty%n");
+            System.out.println("Tytuł nie może być pusty");
             return;
         }
         StudyTask task = new StudyTask(nextId, title);
@@ -32,9 +32,9 @@ public class StudyTaskManager {
         StudyTask task = findById(id);
         if (task != null) {
             tasks.remove(task);
-            System.out.printf("Zadanie zostało usunięte%n");
+            System.out.println("Zadanie zostało usunięte");
         } else {
-            System.out.printf("Nie znaleziono zadania%n");
+            System.out.println("Nie znaleziono zadania");
         }
     }
 
@@ -43,21 +43,21 @@ public class StudyTaskManager {
         if (task != null) {
             task.markCompleted();
         } else {
-            System.out.printf("Nie znaleziono zadania%n");
+            System.out.println("Nie znaleziono zadania");
         }
     }
 
     public void showAllTasks() {
         if (tasks.isEmpty()) {
-            System.out.print("Brak zadań");
+            System.out.println("Brak zadań");
             return;
         }
         for (StudyTask task : tasks) {
             System.out.printf("ID: %d Tytuł: %s Tagi: %s Status: ", task.getId(), task.getTitle(), task.getTags());
             if (task.isCompleted()) {
-                System.out.printf("Ukończone%n");
+                System.out.println("Ukończone");
             } else {
-                System.out.printf("Aktywne%n");
+                System.out.println("Aktywne");
             }
         }
     }
@@ -81,7 +81,7 @@ public class StudyTaskManager {
     public void showTasksByTag(String tag) {
         tag = tag.trim().toLowerCase();
         if (tag.isEmpty()) {
-            System.out.printf("Tag nie może być pusty%n");
+            System.out.println("Tag nie może być pusty");
             return;
         }
         for (StudyTask task : tasks) {
@@ -97,7 +97,7 @@ public class StudyTaskManager {
             allTags.addAll(task.getTags());
         }
         if (allTags.isEmpty()) {
-            System.out.printf("Brak tagów%n");
+            System.out.println("Brak tagów");
         } else {
             System.out.printf("Wszystkie tagi: %s%n", allTags);
         }

@@ -35,35 +35,35 @@ public class StudyTask {
     public void markCompleted() {
         if (!completed) {
             completed = true;
-            System.out.printf("Zadanie oznaczone jako ukończone%n");
+            System.out.println("Zadanie oznaczone jako ukończone");
         } else {
-            System.out.printf("Zadanie jest już ukończone%n");
+            System.out.println("Zadanie jest już ukończone");
         }
     }
 
     public void addTag(String tag) {
         tag = tag.trim().toLowerCase();
         if (tag.isEmpty()) {
-            System.out.printf("Tag nie może być pusty%n");
+            System.out.println("Tag nie może być pusty");
             return;
         }
         if (tags.add(tag)) {
-            System.out.printf("Tag został dodany%n");
+            System.out.println("Tag został dodany");
         } else {
-            System.out.printf("Tag juz istnieje%n");
+            System.out.println("Tag juz istnieje");
         }
     }
 
     public void removeTag(String tag) {
         tag = tag.trim().toLowerCase();
         if (tag.isEmpty()) {
-            System.out.printf("Tag  nie może być pusty%n");
+            System.out.println("Tag  nie może być pusty");
             return;
         }
         if (tags.remove(tag)) {
-            System.out.printf("Tag został usunięty%n");
+            System.out.println("Tag został usunięty");
         } else {
-            System.out.printf("Nie znaleziono tagu%n");
+            System.out.println("Nie znaleziono tagu");
         }
     }
 }

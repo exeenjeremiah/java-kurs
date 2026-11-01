@@ -76,7 +76,7 @@ public class StudyTaskMenu {
                         String tag = scanner.nextLine();
                         task.addTag(tag);
                     } else {
-                        System.out.printf("Nie znaleziono zadania%n");
+                        System.out.println("Nie znaleziono zadania");
                     }
                 }
 
@@ -91,7 +91,7 @@ public class StudyTaskMenu {
                         String tag = scanner.nextLine();
                         task.removeTag(tag);
                     } else {
-                        System.out.printf("Nie znaleziono zadania%n");
+                        System.out.println("Nie znaleziono zadania");
                     }
                 }
 
@@ -104,7 +104,7 @@ public class StudyTaskMenu {
                 case "8" -> manager.showAllTags();
 
                 case "0" -> {
-                    System.out.println("Koniec programu ");
+                    System.out.println("Koniec programu");
                     return;
                 }
 

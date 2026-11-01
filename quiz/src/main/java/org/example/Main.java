@@ -111,8 +111,9 @@ public class Main {
 
         System.out.print("\nIle razy był dany wynik:\n");
 
-        for (int score : counts.keySet()) {
-            int count = counts.get(score);
+        for (Map.Entry<Integer, Integer> entry : counts.entrySet()) {
+            int score = entry.getKey();
+            int count = entry.getValue();
             System.out.printf("%d - %d razy%n", score, count);
 
             if (count > max) {

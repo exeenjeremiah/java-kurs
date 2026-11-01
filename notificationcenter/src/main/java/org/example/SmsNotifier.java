@@ -4,7 +4,7 @@ public class SmsNotifier implements Notifier {
     private String number;
     private static int createdCount = 0;
 
-    public SmsNotifier(String address) {
+    public SmsNotifier(String number) {
         this.number = number.trim();
         createdCount++;
     }

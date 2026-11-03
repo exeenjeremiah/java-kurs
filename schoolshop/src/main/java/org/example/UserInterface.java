@@ -24,7 +24,8 @@ public class UserInterface {
                     6. Kup
                     7. Wyczyść koszyk bez zakupu
                     0. Wyjście
-                    Wybierz opcję:""");
+                    Wybierz opcję:
+                    """);
 
             option = readNumber();
             switch (option) {
@@ -54,7 +55,13 @@ public class UserInterface {
 
         System.out.println("Podaj ilosc: ");
         int quantity = readNumber();
-        shop.addToCart(code, quantity);
+        try {
+            shop.addToCart(code, quantity);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Błąd liczby sztuk: " + e.getMessage());
+        } catch (InsufficientStockException e) {
+            System.err.println("Błąd stanu magazynu: " + e.getMessage());
+        }
     }
 
     private void removeProduct() {

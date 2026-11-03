@@ -24,11 +24,10 @@ public class Shop {
 
     }
 
-    public void addToCart(String code, int quantity) {
+    public void addToCart(String code, int quantity) throws InsufficientStockException {
 
-        if (quantity <= 0) {
-            System.out.println("Ilosc musi byc dodatnia.");
-            return;
+        if (quantity < 1) {
+            throw new IllegalArgumentException("Liczba sztuk musi być większa od 0");
         }
         Product product = catalog.findProduct(code);
 
@@ -41,8 +40,7 @@ public class Shop {
         int inCart = cart.getQuantity(productCode);
 
         if (quantity > product.getStock() - inCart) {
-            System.out.println("Za malo sztuk w magazynie.");
-            return;
+            throw new InsufficientStockException("Brak wystarczajacej liczby sztuk w magazynie");
         }
 
         cart.add(productCode, quantity);

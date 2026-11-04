@@ -40,12 +40,6 @@ public class ShipmentManager {
     }
 
     public void addParcel(String id, String recipient, int weighGrams) {
-
-        if (weighGrams <= 0) {
-            System.out.println("Masa musi być większa od zera.");
-            return;
-        }
-
         Parcel parcel = new Parcel(id, recipient, weighGrams);
         addShipment(parcel);
     }
@@ -108,7 +102,7 @@ public class ShipmentManager {
         return total;
     }
 
-    public void sendShipment(String id) {
+    public void sendShipment(String id) throws AlreadySentException {
         Shipment shipment = findById(id);
 
         if (shipment == null) {
@@ -117,13 +111,12 @@ public class ShipmentManager {
         }
 
         if (!shipment.markSent()) {
-            System.out.println("Przesyłka została już nadana.");
-            return;
+            throw new AlreadySentException("Przesyłka została już nadana.");
         }
 
-        history.add("Nadano" + shipment.getId() + " do " + shipment.getRecipient());
+        history.add("Nadano: " + shipment.getId() + " do " + shipment.getRecipient());
 
-        System.out.printf("Nadano przesyłkę %s%n", shipment.getId());
+        System.out.printf("Nadano przesyłkę :%s%n", shipment.getId());
     }
 
     public void showHistory() {

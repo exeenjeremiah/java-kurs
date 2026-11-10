@@ -10,7 +10,7 @@ public class Stack<T> {
 
     public void push(T value) {
         Node<T> node = new Node<>(value);
-        node.next = head;
+        node.setNext(head);
         head = node;
     }
 
@@ -18,8 +18,8 @@ public class Stack<T> {
         if (head == null) {
             throw new IllegalStateException();
         }
-        T value = head.value;
-        head = head.next;
+        T value = head.getValue();
+        head = head.getNext();
         return value;
     }
 
@@ -27,10 +27,10 @@ public class Stack<T> {
         Node<T> temp = head;
 
         while (temp != null) {
-            if (temp.value == value) {
+            if (temp.getValue() == value) {
                 return true;
             }
-            temp = temp.next;
+            temp = temp.getNext();
         }
         return false;
     }
@@ -40,15 +40,15 @@ public class Stack<T> {
             return false;
         }
 
-        if (head.value == value) {
-            head = head.next;
+        if (head.getValue()== value) {
+            head = head.getNext();
             return true;
         }
 
         Node<T> temp = head;
-        while (temp.next != null) {
-            if (temp.next.value == value) {
-                temp.next = temp.next.next;
+        while (temp.getNext() != null) {
+            if (temp.getNext().getValue() == value) {
+                temp.setNext(temp.getNext().getNext());
                 return true;
             }
         }
@@ -59,8 +59,8 @@ public class Stack<T> {
         Node<T> temp = head;
 
         while (temp != null) {
-            System.out.println(temp.value);
-            temp = temp.next;
+            System.out.println(temp.getValue());
+            temp = temp.getNext();
         }
     }
 
@@ -72,24 +72,24 @@ public class Stack<T> {
         }
 
         Node<T> temp = head;
-        while (temp.next != null) {
-            temp = temp.next;
+        while (temp.getNext() != null) {
+            temp = temp.getNext();
         }
-        temp.next = node;
+        temp.setNext(node);
     }
 
     public void removeAll(T value) {
-        if (head != null && head.value == value) {
-            head = head.next;
+        if (head != null && head.getValue() == value) {
+            head = head.getNext();
         }
 
         Node<T> temp = head;
 
-        while (temp != null && temp.next != null) {
-            if (temp.next.value == value) {
-                temp.next = temp.next.next;
+        while (temp != null && temp.getNext() != null) {
+            if (temp.getNext().getValue() == value) {
+                temp.setNext(temp.getNext().getNext());
             } else {
-                temp = temp.next;
+                temp = temp.getNext();
             }
         }
     }

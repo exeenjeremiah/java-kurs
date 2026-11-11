@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 public class ShipmentManager {
@@ -44,9 +45,9 @@ public class ShipmentManager {
         addShipment(parcel);
     }
 
-    public Shipment findById(String id) {
+    public Optional<Shipment> findById(String id) {
         id = id.trim().toUpperCase();
-        return shipments.get(id);
+        return Optional.ofNullable(shipments.get(id));
     }
 
     public void showAllShipments() {
@@ -71,13 +72,14 @@ public class ShipmentManager {
     }
 
     public void showById(String id) {
-        Shipment shipment = findById(id);
+        Optional<Shipment> result = findById(id);
 
-        if (shipment == null) {
+        if (result.isEmpty()) {
             System.out.println("Nie znaleziono przesyłki.");
             return;
         }
 
+        Shipment shipment = result.get();
         String status = "Nienadana";
 
         if (shipment.isSent()) {
@@ -103,12 +105,14 @@ public class ShipmentManager {
     }
 
     public void sendShipment(String id) throws AlreadySentException {
-        Shipment shipment = findById(id);
+        Optional<Shipment> result = findById(id);
 
-        if (shipment == null) {
+        if (result.isEmpty()) {
             System.out.println("Nie znaleziono przesyłki");
             return;
         }
+
+        Shipment shipment = result.get();
 
         if (!shipment.markSent()) {
             throw new AlreadySentException("Przesyłka została już nadana.");
@@ -149,20 +153,15 @@ public class ShipmentManager {
     }
 
     public void removeShipment(String id) {
-        Shipment shipment = findById(id);
+        findById(id).ifPresentOrElse(shipment -> {
 
-        if (shipment == null) {
-            System.out.println("Nie znaleziono przesyłki.");
-            return;
-        }
+            if (shipment.isSent()) {
+                System.out.println("Nie można usunąć nadanej przesyłki.");
+                return;
+            }
+            shipments.remove(shipment.getId());
 
-        if (shipment.isSent()) {
-            System.out.println("Nie można usunąć nadanej przesyłki.");
-            return;
-        }
-
-        shipments.remove(shipment.getId());
-
-        System.out.printf("Usunięto przesyłkę %s%n", shipment.getId());
+            System.out.printf("Usunięto przesyłkę %s%n", shipment.getId());
+        }, () -> System.out.println("Nie znaleziono przesyłki"));
     }
 }

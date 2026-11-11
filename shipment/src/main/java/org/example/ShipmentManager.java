@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 public class ShipmentManager {
@@ -40,19 +41,13 @@ public class ShipmentManager {
     }
 
     public void addParcel(String id, String recipient, int weighGrams) {
-
-        if (weighGrams <= 0) {
-            System.out.println("Masa musi być większa od zera.");
-            return;
-        }
-
         Parcel parcel = new Parcel(id, recipient, weighGrams);
         addShipment(parcel);
     }
 
-    public Shipment findById(String id) {
+    public Optional<Shipment> findById(String id) {
         id = id.trim().toUpperCase();
-        return shipments.get(id);
+        return Optional.ofNullable(shipments.get(id));
     }
 
     public void showAllShipments() {
@@ -77,13 +72,14 @@ public class ShipmentManager {
     }
 
     public void showById(String id) {
-        Shipment shipment = findById(id);
+        Optional<Shipment> result = findById(id);
 
-        if (shipment == null) {
+        if (result.isEmpty()) {
             System.out.println("Nie znaleziono przesyłki.");
             return;
         }
 
+        Shipment shipment = result.get();
         String status = "Nienadana";
 
         if (shipment.isSent()) {
@@ -108,22 +104,23 @@ public class ShipmentManager {
         return total;
     }
 
-    public void sendShipment(String id) {
-        Shipment shipment = findById(id);
+    public void sendShipment(String id) throws AlreadySentException {
+        Optional<Shipment> result = findById(id);
 
-        if (shipment == null) {
+        if (result.isEmpty()) {
             System.out.println("Nie znaleziono przesyłki");
             return;
         }
 
+        Shipment shipment = result.get();
+
         if (!shipment.markSent()) {
-            System.out.println("Przesyłka została już nadana.");
-            return;
+            throw new AlreadySentException("Przesyłka została już nadana.");
         }
 
-        history.add("Nadano" + shipment.getId() + " do " + shipment.getRecipient());
+        history.add("Nadano: " + shipment.getId() + " do " + shipment.getRecipient());
 
-        System.out.printf("Nadano przesyłkę %s%n", shipment.getId());
+        System.out.printf("Nadano przesyłkę :%s%n", shipment.getId());
     }
 
     public void showHistory() {
@@ -156,20 +153,15 @@ public class ShipmentManager {
     }
 
     public void removeShipment(String id) {
-        Shipment shipment = findById(id);
+        findById(id).ifPresentOrElse(shipment -> {
 
-        if (shipment == null) {
-            System.out.println("Nie znaleziono przesyłki.");
-            return;
-        }
+            if (shipment.isSent()) {
+                System.out.println("Nie można usunąć nadanej przesyłki.");
+                return;
+            }
+            shipments.remove(shipment.getId());
 
-        if (shipment.isSent()) {
-            System.out.println("Nie można usunąć nadanej przesyłki.");
-            return;
-        }
-
-        shipments.remove(shipment.getId());
-
-        System.out.printf("Usunięto przesyłkę %s%n", shipment.getId());
+            System.out.printf("Usunięto przesyłkę %s%n", shipment.getId());
+        }, () -> System.out.println("Nie znaleziono przesyłki"));
     }
 }

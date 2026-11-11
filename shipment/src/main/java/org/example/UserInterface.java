@@ -29,19 +29,24 @@ public class UserInterface {
                     """);
 
             option = readNumber("Wybierz opcję: ");
-
-            switch (option) {
-                case 1 -> addLetter();
-                case 2 -> addParcel();
-                case 3 -> manager.showAllShipments();
-                case 4 -> findShipment();
-                case 5 -> showCost();
-                case 6 -> sendShipment();
-                case 7 -> manager.showHistory();
-                case 8 -> manager.showRecipients();
-                case 9 -> removeShipment();
-                case 0 -> System.out.println("Koniec programu");
-                default -> System.out.println("Nie ma takiej opcji.");
+            try {
+                switch (option) {
+                    case 1 -> addLetter();
+                    case 2 -> addParcel();
+                    case 3 -> manager.showAllShipments();
+                    case 4 -> findShipment();
+                    case 5 -> showCost();
+                    case 6 -> sendShipment();
+                    case 7 -> manager.showHistory();
+                    case 8 -> manager.showRecipients();
+                    case 9 -> removeShipment();
+                    case 0 -> System.out.println("Koniec programu");
+                    default -> System.out.println("Nie ma takiej opcji.");
+                }
+            } catch (IllegalArgumentException e) {
+                System.err.println(e.getMessage());
+            } catch (AlreadySentException e) {
+                System.err.println(e.getMessage());
             }
         } while (option != 0);
     }
@@ -67,7 +72,7 @@ public class UserInterface {
         manager.removeShipment(id);
     }
 
-    private void sendShipment() {
+    private void sendShipment() throws AlreadySentException {
         System.out.println("Podaj ID: ");
         String id = scanner.nextLine();
         manager.sendShipment(id);

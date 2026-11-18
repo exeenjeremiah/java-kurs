@@ -1,5 +1,7 @@
 package org.example.library;
 
+import java.util.Optional;
+
 public class LibraryService {
     private final int librarySize = 10;
     private final LibraryItem[] items = new LibraryItem[librarySize];
@@ -28,29 +30,27 @@ public class LibraryService {
 
     public void borrowItem(String title)
             throws TitleNotFoundException, AlreadyBorrowedException {
-        LibraryItem item = findItem(title);
-        if (item == null) {
-            throw new TitleNotFoundException(
-                    "Nie znaleziono podanego tytułu: " + title);
-        }
+        LibraryItem item = findItem(title).orElseThrow(
+                () -> new TitleNotFoundException(
+                    "Nie znaleziono podanego tytułu: " + title)
+        );
         item.borrow();
     }
 
     public void returnItem(String title)
             throws TitleNotFoundException {
-        LibraryItem item = findItem(title);
-        if (item == null) {
-            throw new TitleNotFoundException(
-                    "Nie znaleziono podanego tytułu: " + title);
-        }
+        LibraryItem item = findItem(title).orElseThrow(
+                () -> new TitleNotFoundException(
+                    "Nie znaleziono podanego tytułu: " + title)
+        );
         item.returnItem();
     }
 
-    private LibraryItem findItem(String title) {
+    private Optional<LibraryItem> findItem(String title) {
         for (LibraryItem item : items) {
             if (item != null && item.getTitle().equals(title))
-                return item;
+                return Optional.of(item);
         }
-        return null;
+        return Optional.empty();
     }
 }

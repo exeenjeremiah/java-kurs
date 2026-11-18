@@ -1,5 +1,7 @@
 package org.example.library;
 
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class TerminalInterface {
@@ -11,10 +13,9 @@ public class TerminalInterface {
     }
 
     private void displayItems(boolean borrowed) {
-        for (LibraryItem item : library.listItems(borrowed)) {
-            if (item != null)
-                System.out.println(item);
-        }
+        Arrays.stream(library.listItems(borrowed))
+                .filter(Objects::nonNull)
+                .forEach(System.out::println);
     }
 
     private void displayItemsCounts() {

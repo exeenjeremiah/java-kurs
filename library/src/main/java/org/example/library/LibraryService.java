@@ -1,5 +1,7 @@
 package org.example.library;
 
+import java.util.Arrays;
+
 public class LibraryService {
     private final int librarySize = 10;
     private final LibraryItem[] items = new LibraryItem[librarySize];
@@ -14,16 +16,10 @@ public class LibraryService {
     }
 
     public LibraryItem[] listItems(boolean borrowed) {
-        LibraryItem[] result = new LibraryItem[librarySize];
-        int i = 0;
-
-        for (LibraryItem item : items) {
-            if (item != null && item.isBorrowed() == borrowed) {
-                result[i] = item;
-                i++;
-            }
-        }
-        return result;
+        return Arrays.stream(items)
+                .filter(item -> item !=null)
+                .filter(item -> item.isBorrowed() == borrowed)
+                .toArray(LibraryItem[]::new);
     }
 
     public void borrowItem(String title)

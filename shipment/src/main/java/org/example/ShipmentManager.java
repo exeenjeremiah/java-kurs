@@ -94,14 +94,11 @@ public class ShipmentManager {
     }
 
     public int calculateUnsentCost() {
-        int total = 0;
+        return shipments.values().stream()
+                .filter(shipment -> !shipment.isSent())
+                .mapToInt(Shipment::calculateCost)
+                .sum();
 
-        for (Shipment shipment : shipments.values()) {
-            if (!shipment.isSent()) {
-                total += shipment.calculateCost();
-            }
-        }
-        return total;
     }
 
     public void sendShipment(String id) throws AlreadySentException {
@@ -128,28 +125,21 @@ public class ShipmentManager {
             System.out.println("Historia jest pusta");
             return;
         }
-
-        for (String entry : history) {
-            System.out.println(entry);
-        }
+        history.stream()
+                .forEach(System.out::println);
     }
 
     public void showRecipients() {
-        Set<String> recipients = new HashSet<>();
-
-        for (Shipment shipment : shipments.values()) {
-            String recipient = shipment.getRecipient().trim().toLowerCase();
-            recipients.add(recipient);
-        }
+        List<String> recipients = shipments.values().stream()
+                .map(shipment -> shipment.getRecipient().trim().toLowerCase())
+                .distinct()
+                .toList();
 
         if (recipients.isEmpty()) {
             System.out.println("Brak odbiorców.");
             return;
         }
-
-        for (String recipient : recipients) {
-            System.out.println(recipient);
-        }
+        recipients.forEach(System.out::println);
     }
 
     public void removeShipment(String id) {

@@ -1,7 +1,9 @@
 package Test;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -23,5 +25,29 @@ public class Main {
                         Collectors.averagingDouble(Employee::salary)));
         System.out.println(avgSalary);
 
+
+        Map<String, Optional<Employee>> highestSalary = employees.stream()
+                .collect(Collectors.groupingBy(Employee::department,
+                        Collectors.maxBy(Comparator.comparingDouble(Employee::salary))));
+        System.out.println(highestSalary);
+
+
+        Map<String, String> names = employees.stream()
+                .filter(employee -> employee.age() > 30)
+                .sorted(Comparator.comparing(Employee::name))
+                .collect(Collectors.groupingBy(Employee::department,
+                        Collectors.mapping(Employee::name,
+                                Collectors.joining(" | "))));
+        System.out.println(names);
+
+
+        List<String> topThreeEmployees = employees.stream()
+                .sorted(Comparator.comparingDouble(Employee::salary)
+                        .reversed()
+                        .thenComparingInt(Employee::age))
+                .limit(3)
+                .map(Employee::name)
+                .toList();
+        System.out.println(topThreeEmployees);
     }
 }

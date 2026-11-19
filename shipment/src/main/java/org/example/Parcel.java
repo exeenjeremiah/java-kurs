@@ -5,6 +5,10 @@ public class Parcel extends Shipment {
 
     public Parcel(String id, String recipient, int weightGrams) {
         super(id, recipient);
+
+        if (weightGrams <= 0) {
+            throw new IllegalArgumentException("Masa musi być większa od zera.");
+        }
         this.weightGrams = weightGrams;
     }
 

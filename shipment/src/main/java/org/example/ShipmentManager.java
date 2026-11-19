@@ -1,0 +1,157 @@
+package org.example;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+
+public class ShipmentManager {
+    private final Map<String, Shipment> shipments;
+    private final List<String> history;
+
+    public ShipmentManager() {
+        shipments = new LinkedHashMap<>();
+        history = new ArrayList<>();
+
+    }
+
+    private void addShipment(Shipment shipment) {
+        String id = shipment.getId();
+
+        if (id.isEmpty() || shipment.getRecipient().isEmpty()) {
+            System.out.println("ID i odbiorca nie mogą być puste.");
+            return;
+        }
+
+        if (shipments.containsKey(id)) {
+            System.out.println("Przesyłka o takim ID już istnieje.");
+            return;
+        }
+
+        shipments.put(id, shipment);
+        System.out.printf("Dodano przesyłkę %s%n", id);
+    }
+
+    public void addLetter(String id, String recipient, boolean registered) {
+        Letter letter = new Letter(id, recipient, registered);
+        addShipment(letter);
+    }
+
+    public void addParcel(String id, String recipient, int weighGrams) {
+        Parcel parcel = new Parcel(id, recipient, weighGrams);
+        addShipment(parcel);
+    }
+
+    public Optional<Shipment> findById(String id) {
+        id = id.trim().toUpperCase();
+        return Optional.ofNullable(shipments.get(id));
+    }
+
+    public void showAllShipments() {
+        if (shipments.isEmpty()) {
+            System.out.println("Rejestr jest pusty.");
+            return;
+        }
+
+        for (Shipment shipment : shipments.values()) {
+            String status = "Nienadana";
+
+            if (shipment.isSent()) {
+                status = "Nadana";
+            }
+
+            System.out.printf("ID: %s | %s Koszt: %.2f zł Status: %s%n",
+                    shipment.getId(),
+                    shipment.getDescription(),
+                    shipment.calculateCost() / 100.0,
+                    status);
+        }
+    }
+
+    public void showById(String id) {
+        Optional<Shipment> result = findById(id);
+
+        if (result.isEmpty()) {
+            System.out.println("Nie znaleziono przesyłki.");
+            return;
+        }
+
+        Shipment shipment = result.get();
+        String status = "Nienadana";
+
+        if (shipment.isSent()) {
+            status = "Nadana";
+        }
+
+        System.out.printf("ID: %s | %s Koszt: %.2f zł Status: %s%n",
+                shipment.getId(),
+                shipment.getDescription(),
+                shipment.calculateCost() / 100.0,
+                status);
+    }
+
+    public int calculateUnsentCost() {
+        return shipments.values().stream()
+                .filter(shipment -> !shipment.isSent())
+                .mapToInt(Shipment::calculateCost)
+                .sum();
+
+    }
+
+    public void sendShipment(String id) throws AlreadySentException {
+        Optional<Shipment> result = findById(id);
+
+        if (result.isEmpty()) {
+            System.out.println("Nie znaleziono przesyłki");
+            return;
+        }
+
+        Shipment shipment = result.get();
+
+        if (!shipment.markSent()) {
+            throw new AlreadySentException("Przesyłka została już nadana.");
+        }
+
+        history.add("Nadano: " + shipment.getId() + " do " + shipment.getRecipient());
+
+        System.out.printf("Nadano przesyłkę :%s%n", shipment.getId());
+    }
+
+    public void showHistory() {
+        if (history.isEmpty()) {
+            System.out.println("Historia jest pusta");
+            return;
+        }
+        history.stream()
+                .forEach(System.out::println);
+    }
+
+    public void showRecipients() {
+        List<String> recipients = shipments.values().stream()
+                .map(shipment -> shipment.getRecipient().trim().toLowerCase())
+                .distinct()
+                .toList();
+
+        if (recipients.isEmpty()) {
+            System.out.println("Brak odbiorców.");
+            return;
+        }
+        recipients.forEach(System.out::println);
+    }
+
+    public void removeShipment(String id) {
+        findById(id).ifPresentOrElse(shipment -> {
+
+            if (shipment.isSent()) {
+                System.out.println("Nie można usunąć nadanej przesyłki.");
+                return;
+            }
+            shipments.remove(shipment.getId());
+
+            System.out.printf("Usunięto przesyłkę %s%n", shipment.getId());
+        }, () -> System.out.println("Nie znaleziono przesyłki"));
+    }
+}

@@ -1,5 +1,7 @@
 package org.example.library;
 
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class TerminalInterface {
@@ -11,10 +13,9 @@ public class TerminalInterface {
     }
 
     private void displayItems(boolean borrowed) {
-        for (LibraryItem item : library.listItems(borrowed)) {
-            if (item != null)
-                System.out.println(item);
-        }
+        Arrays.stream(library.listItems(borrowed))
+                .filter(Objects::nonNull)
+                .forEach(System.out::println);
     }
 
     private void displayItemsCounts() {
@@ -22,14 +23,16 @@ public class TerminalInterface {
         System.out.println("Liczba filmów: " + Movie.getCount());
     }
 
-    private void borrowItem() {
-        System.out.println("Podaj tytuł do wypożyczniea");
-        library.borrowItem(scanner.nextLine());
+    private void borrowItem() throws TitleNotFoundException, AlreadyBorrowedException {
+        System.out.println("Podaj tytuł do wypożyczenia");
+        String title = scanner.nextLine();
+        library.borrowItem(title);
     }
 
-    private void returnItem() {
+    private void returnItem() throws TitleNotFoundException {
         System.out.println("Podaj tytuł do zwrotu");
-        library.returnItem(scanner.nextLine());
+        String title = scanner.nextLine();
+        library.returnItem(title);
     }
 
     public void start() {
@@ -54,14 +57,22 @@ public class TerminalInterface {
             choice = scanner.nextInt();
             scanner.nextLine();
 
-            switch (choice) {
-                case 1 -> displayItems(false);
-                case 2 -> displayItems(true);
-                case 3 -> borrowItem();
-                case 4 -> returnItem();
-                case 5 -> displayItemsCounts();
-                case 6 -> System.out.println("Koniec programu");
-                default -> System.out.println("Nie ma takiej opcji");
+            try {
+                switch (choice) {
+                    case 1 -> displayItems(false);
+                    case 2 -> displayItems(true);
+                    case 3 -> borrowItem();
+                    case 4 -> returnItem();
+                    case 5 -> displayItemsCounts();
+                    case 6 -> System.out.println("Koniec programu");
+                    default -> System.out.println("Nie ma takiej opcji");
+                }
+            } catch (TitleNotFoundException e) {
+                System.err.println("Błąd tytułu: " + e.getMessage());
+            } catch (AlreadyBorrowedException e) {
+                System.err.println("Błąd wypożyczenia: " + e.getMessage());
+            } catch (AlreadyReturnedException e) {
+                System.err.println("Błąd zwrotu: " + e.getMessage());
             }
         }
     }
